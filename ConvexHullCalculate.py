@@ -3,8 +3,8 @@ from scipy.spatial import ConvexHull
 from fractions import Fraction
 np.set_printoptions(formatter = {'all':lambda x : str(Fraction(x).limit_denominator())})
 #自訂def
-from ConvexHullCalculate.defineFunc.GE import *
-from ConvexHullCalculate.defineFunc.Vertices import *
+from defineFunc.GE import *
+from defineFunc.Vertices import *
 
 def ConvexHullCalculate(list_A):
     A = np.mat(list_A)
@@ -29,7 +29,7 @@ def ConvexHullCalculate(list_A):
     #如果p為其中一點, 結束
     #反之, 開始找頂點"
     if not IsInConv:
-        print("提示: p不是其中一點,開始求超平面維度")
+        #print("提示: p不是其中一點,開始求超平面維度")
         #step 2 確定超平面維度
         #1)以p為基準,把所有點拉到原點上
         for i in range(n):# 先把其他點減p 
@@ -66,10 +66,10 @@ def ConvexHullCalculate(list_A):
 
         #3)求rank
         Rank = R.shape[0]
-        print("提示: 仿設空間維度: ",Rank)
+        #print("提示: 仿設空間維度: ",Rank)
 
         if Rank == m:    #a)如果仿設空間維度相同, 開始用ConvexHull找頂點, 最後判斷p是否為頂點
-            print("提示: 維度剛好, 直接求頂點")
+            #print("提示: 維度剛好, 直接求頂點")
             IsInConv = UseVerticesToCheck(A)
         elif Rank < m:   #b)如果仿設空間維度太小, 先換成座標, 再用ConvexHull求座標的頂點, 最後判斷p是否為頂點
             print("提示: 維度不足, 換成座標")
